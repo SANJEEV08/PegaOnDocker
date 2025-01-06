@@ -6,12 +6,13 @@ This repository demonstrates how the PEGA Web Application along with its Databas
   1. Setup Docker 'secrets' to handle sensitive information:
 
        (a) Navigate and create a sub folder 'run' under the main working directory
+     
        (b) Create an ENV file named 'secrets.env' with the following contents.
 
-           POSTGRES_USER=postgres
-           POSTGRES_PASSWORD=postgres
+           POSTGRES_USER=<USER>
+           POSTGRES_PASSWORD=<PASSWORD>
 
-       (c) Iniate Docker Swarm to connect the present working node to swarm.
+       (c) Iniate Docker Swarm to connect the present working node to swarm. Docker Swarm is necessary to use 'secrets' in YAML files.
 
            docker swarm init
 
@@ -48,12 +49,12 @@ This repository demonstrates how the PEGA Web Application along with its Databas
                 }
             ]
 
-            All Docker secrets are encoded with the 'Raft' algorithm.
+            All Docker secrets are encoded with the 'Raft' algorithm by default.
 
 
 
 
-  3. Write the Dockerfile - Create an Image - Initiate a Container:
+  2. Write the Dockerfile - Create an Image:
 
       (a) Write the Dockerfile.
 
@@ -77,13 +78,21 @@ This repository demonstrates how the PEGA Web Application along with its Databas
 
          docker build -t postgres -f Dockerfile-PostgreSQL .
 
+  3. Create a Custom Network and Initiate a Container:
+
+      Here we create a custom 'BRIDGE' network to help ensure the Database talks to the host in a secure way.
+
+     (a) Create the custom 'BRIDGE'.
+
+         docker network create --driver bridge pega-database 
+      
      (c) Initiate a Container.
 
-         docker run -p 5432:5432 --name postgres-container postgres
+         docker run --network pega-database -p 5433:5432 --name postgres-container postgres
 
-     (d) Try connecting to the Database via PGAdmin
+     (d) Try connecting to the Database via pgAdmin.
 
-         - Under 'Hostname/address' give either the value of 'localhost' or the IP Address of your Virtual Machine created by the hypervisor 'Hyper-V' in this case. This will act as a host to connect to the container.
+         - Under 'Hostname/address' give either the value of 'localhost' or the IP Address of your Virtual Machine created by the hypervisor 'Hyper-V' in this case and assign the port as '5433'. This will act as a host to connect to the container.
 
 
      # References:
