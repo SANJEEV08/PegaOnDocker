@@ -11,7 +11,7 @@ This repository demonstrates how the PEGA Web Application along with its Databas
            POSTGRES_USER=postgres
            POSTGRES_PASSWORD=postgres
 
-       (c) Iniate Docker Swarm to connect the working node to swarm.
+       (c) Iniate Docker Swarm to connect the present working node to swarm.
 
            docker swarm init
 
@@ -48,10 +48,12 @@ This repository demonstrates how the PEGA Web Application along with its Databas
                 }
             ]
 
+            All Docker secrets are encoded with the 'Raft' algorithm.
 
 
 
-  2. Write the Dockerfile - Create an Image - Initiate a Container:
+
+  3. Write the Dockerfile - Create an Image - Initiate a Container:
 
       (a) Write the Dockerfile.
 
@@ -81,9 +83,7 @@ This repository demonstrates how the PEGA Web Application along with its Databas
 
      (d) Try connecting to the Database via PGAdmin
 
-         - Inspect the IPv4 address:
-
-               docker inspect d0a74beb1d4e and check under "Networks"
+         - Under 'Hostname/address' give either the value of 'localhost' or the IP Address of your Virtual Machine created by the hypervisor 'Hyper-V' in this case. This will act as a host to connect to the container.
 
 
      # References:
