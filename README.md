@@ -94,6 +94,8 @@ This repository demonstrates how the PEGA Web Application along with its Databas
 
          - Under 'Hostname/address' give either the value of 'localhost' or the IP Address of your Virtual Machine created by the hypervisor 'Hyper-V' in this case and assign the port as '5433'. This will act as a host to connect to the container.
 
+     ![PostgreSQL Connection with localhost with Custom Network](https://github.com/user-attachments/assets/a93b711e-a082-42b2-95a7-838ceb161811)
+
 
      # References:
 
